@@ -1,0 +1,36 @@
+<form [formGroup]="group">
+  <div class="container-fluid bg-dark">
+    <div class="row pt-3">
+      <div class="col-md-2 form-group"><input formControlName="from" class="form-control" type="text" placeholder="From"></div>
+      <div class="col-md-2 form-group"><input formControlName="to" class="form-control" type="text" placeholder="To"></div>
+      <div class="col-md-2 form-group"><input value="{{minDate}}" min="{{minDate}}" class="form-control" type="date" disabled
+          placeholder="Depart"></div>
+      <div class="col-md-2 form-group"><input class="form-control" type="date" placeholder="Return" disabled></div>
+      <div class="col-md-2 form-group"><input class="form-control" type="text" placeholder="1|Economy" disabled></div>
+      <div class="col-md-1"><button type="button" class="btn btn-primary" (click)="onClick()">Search</button></div>
+      <div class="col-md-1"><button type="button" class="btn btn-primary" (click)="onLoadClick()">Load All</button></div>
+    </div>
+  </div>
+</form>
+<div class="container mt-3" *ngIf="flightResult">
+  <div class="row bg-primary ">
+    <div class="col-md-2 pt-1 pb-1"></div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-4 font-color-white">Fare</div>
+        <div class="col-md-4 font-color-white">Origin->Destination</div>
+        <div class="col-md-4 font-color-white">Airline</div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngFor="let rs of flightResult | async">
+    <div class="col-md-2 pt-1 pb-1 border"><button type="button" class="btn btn-primary">Select</button></div>
+    <div class="col-md-10 border">
+      <div class="row">
+        <div class="col-md-4">${{rs.Price}}</div>
+        <div class="col-md-4">{{rs.From}}->{{rs.To}}</div>
+        <div class="col-md-4">{{rs.Airline}}</div>
+      </div>
+    </div>
+  </div>
+</div>
